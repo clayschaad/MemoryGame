@@ -5,57 +5,96 @@ namespace MemoryGame.Services;
 public sealed class GameService
 {
     private readonly LocalStorageService _localStorage;
+    private readonly HttpClient _httpClient;
     private readonly Random _random = new();
     private GameStatistics? _statistics;
+    private List<GameWord>? _availableWords;
     
-    private readonly List<GameWord> _defaultWords =
-    [
-        new() { Word = "Gabel", ImagePath = "images/fork.svg", CorrectCount = 0, IncorrectCount = 0 },
-        new() { Word = "Messer", ImagePath = "images/knife.svg", CorrectCount = 0, IncorrectCount = 0 },
-        new() { Word = "Löffel", ImagePath = "images/spoon.svg", CorrectCount = 0, IncorrectCount = 0 },
-        new() { Word = "Tür", ImagePath = "images/door.svg", CorrectCount = 0, IncorrectCount = 0 },
-        new() { Word = "Fenster", ImagePath = "images/window.svg", CorrectCount = 0, IncorrectCount = 0 },
-        new() { Word = "Ball", ImagePath = "images/ball.svg", CorrectCount = 0, IncorrectCount = 0 },
-        new() { Word = "Haus", ImagePath = "images/house.svg", CorrectCount = 0, IncorrectCount = 0 },
-        new() { Word = "Baum", ImagePath = "images/tree.svg", CorrectCount = 0, IncorrectCount = 0 },
-        new() { Word = "Auto", ImagePath = "images/car.svg", CorrectCount = 0, IncorrectCount = 0 },
-        new() { Word = "Katze", ImagePath = "images/cat.svg", CorrectCount = 0, IncorrectCount = 0 },
-        new() { Word = "Hund", ImagePath = "images/dog.svg", CorrectCount = 0, IncorrectCount = 0 },
-        new() { Word = "Stuhl", ImagePath = "images/chair.svg", CorrectCount = 0, IncorrectCount = 0 },
-        new() { Word = "Tisch", ImagePath = "images/table.svg", CorrectCount = 0, IncorrectCount = 0 },
-        new() { Word = "Tasse", ImagePath = "images/cup.svg", CorrectCount = 0, IncorrectCount = 0 },
-        new() { Word = "Buch", ImagePath = "images/book.svg", CorrectCount = 0, IncorrectCount = 0 },
-        new() { Word = "Uhr", ImagePath = "images/clock.svg", CorrectCount = 0, IncorrectCount = 0 },
-        new() { Word = "Bett", ImagePath = "images/bed.svg", CorrectCount = 0, IncorrectCount = 0 },
-        new() { Word = "Telefon", ImagePath = "images/phone.svg", CorrectCount = 0, IncorrectCount = 0 },
-        new() { Word = "Schuh", ImagePath = "images/shoe.svg", CorrectCount = 0, IncorrectCount = 0 },
-        new() { Word = "Hut", ImagePath = "images/hat.svg", CorrectCount = 0, IncorrectCount = 0 }
-    ];
-    
-    public GameService(LocalStorageService localStorage)
+    public GameService(LocalStorageService localStorage, HttpClient httpClient)
     {
         _localStorage = localStorage;
+        _httpClient = httpClient;
     }
     
     public async Task InitializeAsync()
     {
+        await LoadImagesFromFolderAsync();
+        
         _statistics = await _localStorage.LoadStatisticsAsync();
         
         if (_statistics == null)
         {
-            _statistics = new GameStatistics { Words = new List<GameWord>(_defaultWords) };
+            _statistics = new GameStatistics { Words = new List<GameWord>(_availableWords ?? []) };
         }
         else
         {
-            foreach (var defaultWord in _defaultWords)
+            if (_availableWords != null)
             {
-                var existingWord = _statistics.Words.FirstOrDefault(w => w.Word == defaultWord.Word);
-                if (existingWord == null)
+                foreach (var availableWord in _availableWords)
                 {
-                    _statistics.Words.Add(defaultWord);
+                    var existingWord = _statistics.Words.FirstOrDefault(w => w.Word == availableWord.Word);
+                    if (existingWord == null)
+                    {
+                        _statistics.Words.Add(availableWord);
+                    }
                 }
             }
         }
+    }
+    
+    private async Task LoadImagesFromFolderAsync()
+    {
+        _availableWords = [];
+        
+        try
+        {
+            var manifest = await _httpClient.GetStringAsync("images-manifest.txt");
+            var imageNames = manifest.Split('\n', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+            
+            foreach (var imageName in imageNames)
+            {
+                var germanWord = ConvertToGermanWord(imageName);
+                _availableWords.Add(new GameWord
+                {
+                    Word = germanWord,
+                    ImagePath = $"images/{imageName}.svg",
+                    CorrectCount = 0,
+                    IncorrectCount = 0
+                });
+            }
+        }
+        catch
+        {
+            _availableWords = [];
+        }
+    }
+    
+    private static string ConvertToGermanWord(string englishWord)
+    {
+        return englishWord.ToLower() switch
+        {
+            "fork" => "Gabel",
+            "knife" => "Messer",
+            "spoon" => "Löffel",
+            "door" => "Tür",
+            "window" => "Fenster",
+            "ball" => "Ball",
+            "house" => "Haus",
+            "tree" => "Baum",
+            "car" => "Auto",
+            "cat" => "Katze",
+            "dog" => "Hund",
+            "chair" => "Stuhl",
+            "table" => "Tisch",
+            "cup" => "Tasse",
+            "book" => "Buch",
+            "clock" => "Uhr",
+            "bed" => "Bett",
+            "phone" => "Telefon",
+            "shoe" => "Schuh",
+            "hat" => "Hut",
+            _ => char.ToUpper(englishWord[0]) + englishWord[1..].ToLower()
+        };
     }
     
     public GameSession CreateNewGame()
