@@ -133,13 +133,18 @@ MemoryGame/
 
 ## Adding New Words/Images
 
-The game dynamically loads images from the `wwwroot/images/` folder. To add new words and images:
+The game automatically discovers images from the `wwwroot/images/` folder. To add new words and images:
 
 1. **Add your image**: Place an SVG image in `wwwroot/images/` with the English filename (e.g., `apple.svg`, `orange.svg`)
-2. **Update the manifest**: Add the filename (without extension) to `wwwroot/images-manifest.txt`:
-   ```
-   apple
-   orange
+2. **Add to discovery list**: Add the filename (without extension) to the `commonWords` array in `Services/GameService.cs`:
+   ```csharp
+   var commonWords = new[]
+   {
+       "ball", "bed", "book", "car", "cat", "chair", "clock", "cup",
+       "dog", "door", "fork", "hat", "house", "knife", "phone",
+       "shoe", "spoon", "table", "tree", "window",
+       "apple", "orange"  // Add new words here
+   };
    ```
 3. **Add German translation** (optional): If you want a custom German translation, update the `ConvertToGermanWord` method in `Services/GameService.cs`:
    ```csharp
@@ -149,13 +154,7 @@ The game dynamically loads images from the `wwwroot/images/` folder. To add new 
    
    If no translation is provided, the filename will be capitalized and used as-is.
 
-4. **Regenerate manifest** (alternative): You can automatically regenerate the manifest by running:
-   ```bash
-   cd MemoryGame/wwwroot/images
-   ls *.svg | sed 's/\.svg$//' > ../images-manifest.txt
-   ```
-
-The game will automatically load and use the new images in the next session!
+The game will automatically discover and load images that exist in the folder. No manifest file needed!
 
 ## Browser Compatibility
 

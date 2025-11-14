@@ -46,27 +46,39 @@ public sealed class GameService
     {
         _availableWords = [];
         
-        try
+        var commonWords = new[]
         {
-            var manifest = await _httpClient.GetStringAsync("images-manifest.txt");
-            var imageNames = manifest.Split('\n', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
-            
-            foreach (var imageName in imageNames)
+            "ball", "bed", "book", "car", "cat", "chair", "clock", "cup",
+            "dog", "door", "fork", "hat", "house", "knife", "phone",
+            "shoe", "spoon", "table", "tree", "window"
+        };
+        
+        var loadTasks = commonWords.Select(async word =>
+        {
+            var imagePath = $"images/{word}.svg";
+            try
             {
-                var germanWord = ConvertToGermanWord(imageName);
-                _availableWords.Add(new GameWord
+                var response = await _httpClient.GetAsync(imagePath, HttpCompletionOption.ResponseHeadersRead);
+                if (response.IsSuccessStatusCode)
                 {
-                    Word = germanWord,
-                    ImagePath = $"images/{imageName}.svg",
-                    CorrectCount = 0,
-                    IncorrectCount = 0
-                });
+                    var germanWord = ConvertToGermanWord(word);
+                    return new GameWord
+                    {
+                        Word = germanWord,
+                        ImagePath = imagePath,
+                        CorrectCount = 0,
+                        IncorrectCount = 0
+                    };
+                }
             }
-        }
-        catch
-        {
-            _availableWords = [];
-        }
+            catch
+            {
+            }
+            return null;
+        });
+        
+        var results = await Task.WhenAll(loadTasks);
+        _availableWords = results.Where(w => w != null).Cast<GameWord>().ToList();
     }
     
     private static string ConvertToGermanWord(string englishWord)
