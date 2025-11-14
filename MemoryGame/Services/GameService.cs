@@ -10,26 +10,26 @@ public sealed class GameService
     
     private readonly List<GameWord> _defaultWords =
     [
-        new() { Word = "fork", ImagePath = "images/fork.svg", CorrectCount = 0, IncorrectCount = 0 },
-        new() { Word = "knife", ImagePath = "images/knife.svg", CorrectCount = 0, IncorrectCount = 0 },
-        new() { Word = "spoon", ImagePath = "images/spoon.svg", CorrectCount = 0, IncorrectCount = 0 },
-        new() { Word = "door", ImagePath = "images/door.svg", CorrectCount = 0, IncorrectCount = 0 },
-        new() { Word = "window", ImagePath = "images/window.svg", CorrectCount = 0, IncorrectCount = 0 },
-        new() { Word = "ball", ImagePath = "images/ball.svg", CorrectCount = 0, IncorrectCount = 0 },
-        new() { Word = "house", ImagePath = "images/house.svg", CorrectCount = 0, IncorrectCount = 0 },
-        new() { Word = "tree", ImagePath = "images/tree.svg", CorrectCount = 0, IncorrectCount = 0 },
-        new() { Word = "car", ImagePath = "images/car.svg", CorrectCount = 0, IncorrectCount = 0 },
-        new() { Word = "cat", ImagePath = "images/cat.svg", CorrectCount = 0, IncorrectCount = 0 },
-        new() { Word = "dog", ImagePath = "images/dog.svg", CorrectCount = 0, IncorrectCount = 0 },
-        new() { Word = "chair", ImagePath = "images/chair.svg", CorrectCount = 0, IncorrectCount = 0 },
-        new() { Word = "table", ImagePath = "images/table.svg", CorrectCount = 0, IncorrectCount = 0 },
-        new() { Word = "cup", ImagePath = "images/cup.svg", CorrectCount = 0, IncorrectCount = 0 },
-        new() { Word = "book", ImagePath = "images/book.svg", CorrectCount = 0, IncorrectCount = 0 },
-        new() { Word = "clock", ImagePath = "images/clock.svg", CorrectCount = 0, IncorrectCount = 0 },
-        new() { Word = "bed", ImagePath = "images/bed.svg", CorrectCount = 0, IncorrectCount = 0 },
-        new() { Word = "phone", ImagePath = "images/phone.svg", CorrectCount = 0, IncorrectCount = 0 },
-        new() { Word = "shoe", ImagePath = "images/shoe.svg", CorrectCount = 0, IncorrectCount = 0 },
-        new() { Word = "hat", ImagePath = "images/hat.svg", CorrectCount = 0, IncorrectCount = 0 }
+        new() { Word = "Gabel", ImagePath = "images/fork.svg", CorrectCount = 0, IncorrectCount = 0 },
+        new() { Word = "Messer", ImagePath = "images/knife.svg", CorrectCount = 0, IncorrectCount = 0 },
+        new() { Word = "Löffel", ImagePath = "images/spoon.svg", CorrectCount = 0, IncorrectCount = 0 },
+        new() { Word = "Tür", ImagePath = "images/door.svg", CorrectCount = 0, IncorrectCount = 0 },
+        new() { Word = "Fenster", ImagePath = "images/window.svg", CorrectCount = 0, IncorrectCount = 0 },
+        new() { Word = "Ball", ImagePath = "images/ball.svg", CorrectCount = 0, IncorrectCount = 0 },
+        new() { Word = "Haus", ImagePath = "images/house.svg", CorrectCount = 0, IncorrectCount = 0 },
+        new() { Word = "Baum", ImagePath = "images/tree.svg", CorrectCount = 0, IncorrectCount = 0 },
+        new() { Word = "Auto", ImagePath = "images/car.svg", CorrectCount = 0, IncorrectCount = 0 },
+        new() { Word = "Katze", ImagePath = "images/cat.svg", CorrectCount = 0, IncorrectCount = 0 },
+        new() { Word = "Hund", ImagePath = "images/dog.svg", CorrectCount = 0, IncorrectCount = 0 },
+        new() { Word = "Stuhl", ImagePath = "images/chair.svg", CorrectCount = 0, IncorrectCount = 0 },
+        new() { Word = "Tisch", ImagePath = "images/table.svg", CorrectCount = 0, IncorrectCount = 0 },
+        new() { Word = "Tasse", ImagePath = "images/cup.svg", CorrectCount = 0, IncorrectCount = 0 },
+        new() { Word = "Buch", ImagePath = "images/book.svg", CorrectCount = 0, IncorrectCount = 0 },
+        new() { Word = "Uhr", ImagePath = "images/clock.svg", CorrectCount = 0, IncorrectCount = 0 },
+        new() { Word = "Bett", ImagePath = "images/bed.svg", CorrectCount = 0, IncorrectCount = 0 },
+        new() { Word = "Telefon", ImagePath = "images/phone.svg", CorrectCount = 0, IncorrectCount = 0 },
+        new() { Word = "Schuh", ImagePath = "images/shoe.svg", CorrectCount = 0, IncorrectCount = 0 },
+        new() { Word = "Hut", ImagePath = "images/hat.svg", CorrectCount = 0, IncorrectCount = 0 }
     ];
     
     public GameService(LocalStorageService localStorage)

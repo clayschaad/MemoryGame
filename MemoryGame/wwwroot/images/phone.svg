@@ -5,5 +5,5 @@
     <rect x="-20" y="-40" width="40" height="70" fill="#87CEEB"/>
     <circle cx="0" cy="40" r="5" fill="#666"/>
   </g>
-  <text x="100" y="180" text-anchor="middle" font-size="20" fill="#666">PHONE</text>
+  <text x="100" y="180" text-anchor="middle" font-size="20" fill="#666">TELEFON</text>
 </svg>

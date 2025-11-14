@@ -5,5 +5,5 @@
     <rect x="-40" y="0" width="80" height="60" fill="#DEB887" stroke="#333" stroke-width="2"/>
     <rect x="-15" y="20" width="30" height="40" fill="#654321"/>
   </g>
-  <text x="100" y="180" text-anchor="middle" font-size="20" fill="#666">HOUSE</text>
+  <text x="100" y="180" text-anchor="middle" font-size="20" fill="#666">HAUS</text>
 </svg>

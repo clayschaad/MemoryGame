@@ -4,38 +4,38 @@
 @inject GameService GameService
 @inject NavigationManager Navigation
 
-<PageTitle>Memory Game</PageTitle>
+<PageTitle>Memory-Spiel</PageTitle>
 
 <div class="memory-game-container">
     @if (!_initialized)
     {
         <div class="loading">
-            <h2>Loading...</h2>
+            <h2>Lädt...</h2>
         </div>
     }
     else if (_currentSession == null)
     {
         <div class="start-screen">
-            <h1>Memory Game</h1>
-            <p class="subtitle">Practice matching images with words</p>
-            <button class="btn-start" @onclick="StartNewGame">Start New Game</button>
+            <h1>Memory-Spiel</h1>
+            <p class="subtitle">Übe das Zuordnen von Bildern zu Wörtern</p>
+            <button class="btn-start" @onclick="StartNewGame">Neues Spiel starten</button>
         </div>
     }
     else if (_currentSession.IsComplete)
     {
         <div class="results-screen">
-            <h1>Game Complete!</h1>
+            <h1>Spiel beendet!</h1>
             <div class="results">
                 <div class="result-item correct">
-                    <span class="result-label">Correct:</span>
+                    <span class="result-label">Richtig:</span>
                     <span class="result-value">@_currentSession.CorrectAnswers</span>
                 </div>
                 <div class="result-item incorrect">
-                    <span class="result-label">Incorrect:</span>
+                    <span class="result-label">Falsch:</span>
                     <span class="result-value">@_currentSession.IncorrectAnswers</span>
                 </div>
             </div>
-            <button class="btn-start" @onclick="StartNewGame">Play Again</button>
+            <button class="btn-start" @onclick="StartNewGame">Nochmal spielen</button>
         </div>
     }
     else
@@ -46,7 +46,7 @@
             <div class="game-screen">
                 <div class="game-header">
                     <div class="round-counter">
-                        Round @(_currentSession.CurrentRoundIndex + 1) of @_currentSession.Rounds.Count
+                        Runde @(_currentSession.CurrentRoundIndex + 1) von @_currentSession.Rounds.Count
                     </div>
                 </div>
 
@@ -120,12 +120,12 @@
         _showFeedback = true;
         if (round.IsCorrect)
         {
-            _feedbackMessage = "Correct! ✓";
+            _feedbackMessage = "Richtig! ✓";
             _feedbackClass = "correct";
         }
         else
         {
-            _feedbackMessage = $"Incorrect. The correct answer is: {round.CorrectAnswer.Word}";
+            _feedbackMessage = $"Falsch. Die richtige Antwort ist: {round.CorrectAnswer.Word}";
             _feedbackClass = "incorrect";
         }
 

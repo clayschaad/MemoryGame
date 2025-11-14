@@ -5,5 +5,5 @@
     <line x1="-40" y1="0" x2="-40" y2="40" stroke="#8B4513" stroke-width="6"/>
     <line x1="40" y1="0" x2="40" y2="40" stroke="#8B4513" stroke-width="6"/>
   </g>
-  <text x="100" y="180" text-anchor="middle" font-size="20" fill="#666">TABLE</text>
+  <text x="100" y="180" text-anchor="middle" font-size="20" fill="#666">TISCH</text>
 </svg>

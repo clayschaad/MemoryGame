@@ -4,5 +4,5 @@
     <ellipse cx="0" cy="10" rx="50" ry="10" fill="#8B4513" stroke="#333" stroke-width="2"/>
     <path d="M -30,-30 Q -30,-50 0,-50 Q 30,-50 30,-30 L 20,10 L -20,10 Z" fill="#8B4513" stroke="#333" stroke-width="2"/>
   </g>
-  <text x="100" y="180" text-anchor="middle" font-size="20" fill="#666">HAT</text>
+  <text x="100" y="180" text-anchor="middle" font-size="20" fill="#666">HUT</text>
 </svg>

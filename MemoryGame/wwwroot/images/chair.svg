@@ -8,5 +8,5 @@
     <line x1="25" y1="-40" x2="25" y2="-60" stroke="#8B4513" stroke-width="6"/>
     <line x1="-25" y1="-60" x2="25" y2="-60" stroke="#8B4513" stroke-width="6"/>
   </g>
-  <text x="100" y="180" text-anchor="middle" font-size="20" fill="#666">CHAIR</text>
+  <text x="100" y="180" text-anchor="middle" font-size="20" fill="#666">STUHL</text>
 </svg>
