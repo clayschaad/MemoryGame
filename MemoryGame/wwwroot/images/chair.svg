@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <rect width="200" height="200" fill="#f0f0f0"/>
+  <g transform="translate(100,100)">
+    <rect x="-30" y="-40" width="60" height="10" fill="#8B4513"/>
+    <line x1="-25" y1="-30" x2="-25" y2="40" stroke="#8B4513" stroke-width="6"/>
+    <line x1="25" y1="-30" x2="25" y2="40" stroke="#8B4513" stroke-width="6"/>
+    <line x1="-25" y1="-40" x2="-25" y2="-60" stroke="#8B4513" stroke-width="6"/>
+    <line x1="25" y1="-40" x2="25" y2="-60" stroke="#8B4513" stroke-width="6"/>
+    <line x1="-25" y1="-60" x2="25" y2="-60" stroke="#8B4513" stroke-width="6"/>
+  </g>
+  <text x="100" y="180" text-anchor="middle" font-size="20" fill="#666">CHAIR</text>
+</svg>

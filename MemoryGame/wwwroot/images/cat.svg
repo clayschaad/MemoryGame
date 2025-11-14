@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <rect width="200" height="200" fill="#f0f0f0"/>
+  <g transform="translate(100,100)">
+    <ellipse cx="0" cy="0" rx="40" ry="30" fill="#FFA500"/>
+    <circle cx="0" cy="-25" r="25" fill="#FFA500"/>
+    <polygon points="-20,-45 -25,-55 -15,-40" fill="#FFA500"/>
+    <polygon points="20,-45 25,-55 15,-40" fill="#FFA500"/>
+    <circle cx="-10" cy="-25" r="3" fill="#333"/>
+    <circle cx="10" cy="-25" r="3" fill="#333"/>
+  </g>
+  <text x="100" y="180" text-anchor="middle" font-size="20" fill="#666">CAT</text>
+</svg>

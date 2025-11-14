@@ -1,0 +1,148 @@
+﻿@page "/"
+@using MemoryGame.Models
+@using MemoryGame.Services
+@inject GameService GameService
+@inject NavigationManager Navigation
+
+<PageTitle>Memory Game</PageTitle>
+
+<div class="memory-game-container">
+    @if (!_initialized)
+    {
+        <div class="loading">
+            <h2>Loading...</h2>
+        </div>
+    }
+    else if (_currentSession == null)
+    {
+        <div class="start-screen">
+            <h1>Memory Game</h1>
+            <p class="subtitle">Practice matching images with words</p>
+            <button class="btn-start" @onclick="StartNewGame">Start New Game</button>
+        </div>
+    }
+    else if (_currentSession.IsComplete)
+    {
+        <div class="results-screen">
+            <h1>Game Complete!</h1>
+            <div class="results">
+                <div class="result-item correct">
+                    <span class="result-label">Correct:</span>
+                    <span class="result-value">@_currentSession.CorrectAnswers</span>
+                </div>
+                <div class="result-item incorrect">
+                    <span class="result-label">Incorrect:</span>
+                    <span class="result-value">@_currentSession.IncorrectAnswers</span>
+                </div>
+            </div>
+            <button class="btn-start" @onclick="StartNewGame">Play Again</button>
+        </div>
+    }
+    else
+    {
+        var round = _currentSession.CurrentRound;
+        if (round != null)
+        {
+            <div class="game-screen">
+                <div class="game-header">
+                    <div class="round-counter">
+                        Round @(_currentSession.CurrentRoundIndex + 1) of @_currentSession.Rounds.Count
+                    </div>
+                </div>
+
+                @if (round.Type == RoundType.ImageWithWords)
+                {
+                    <div class="question-area">
+                        <img src="@round.CorrectAnswer.ImagePath" alt="Question image" class="question-image" />
+                    </div>
+                    <div class="options-area">
+                        @foreach (var option in round.Options)
+                        {
+                            <button class="option-button word-option" @onclick="() => SelectAnswer(option)">
+                                @option.Word
+                            </button>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="question-area">
+                        <div class="question-word">@round.CorrectAnswer.Word</div>
+                    </div>
+                    <div class="options-area image-options">
+                        @foreach (var option in round.Options)
+                        {
+                            <button class="option-button image-option" @onclick="() => SelectAnswer(option)">
+                                <img src="@option.ImagePath" alt="@option.Word" />
+                            </button>
+                        }
+                    </div>
+                }
+
+                @if (_showFeedback && round.SelectedAnswer != null)
+                {
+                    <div class="feedback @(_feedbackClass)">
+                        @_feedbackMessage
+                    </div>
+                }
+            </div>
+        }
+    }
+</div>
+
+@code {
+    private bool _initialized;
+    private GameSession? _currentSession;
+    private bool _showFeedback;
+    private string _feedbackMessage = "";
+    private string _feedbackClass = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GameService.InitializeAsync();
+        _initialized = true;
+    }
+
+    private void StartNewGame()
+    {
+        _currentSession = GameService.CreateNewGame();
+        _showFeedback = false;
+    }
+
+    private async Task SelectAnswer(GameWord selectedWord)
+    {
+        if (_currentSession?.CurrentRound == null || _showFeedback)
+            return;
+
+        var round = _currentSession.CurrentRound;
+        round.SelectedAnswer = selectedWord;
+
+        _showFeedback = true;
+        if (round.IsCorrect)
+        {
+            _feedbackMessage = "Correct! ✓";
+            _feedbackClass = "correct";
+        }
+        else
+        {
+            _feedbackMessage = $"Incorrect. The correct answer is: {round.CorrectAnswer.Word}";
+            _feedbackClass = "incorrect";
+        }
+
+        await GameService.UpdateStatisticsAsync(round);
+        StateHasChanged();
+
+        await Task.Delay(2000);
+
+        _showFeedback = false;
+        _currentSession.CurrentRoundIndex++;
+
+        if (_currentSession.IsComplete)
+        {
+            _currentSession.EndTime = DateTimeOffset.UtcNow;
+        }
+
+        StateHasChanged();
+    }
+}
+
