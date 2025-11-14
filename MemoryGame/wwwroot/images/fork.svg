@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <rect width="200" height="200" fill="#f0f0f0"/>
+  <g transform="translate(100,100)">
+    <line x1="0" y1="-60" x2="0" y2="60" stroke="#666" stroke-width="6"/>
+    <line x1="-20" y1="-60" x2="-20" y2="0" stroke="#666" stroke-width="4"/>
+    <line x1="-10" y1="-60" x2="-10" y2="0" stroke="#666" stroke-width="4"/>
+    <line x1="10" y1="-60" x2="10" y2="0" stroke="#666" stroke-width="4"/>
+    <line x1="20" y1="-60" x2="20" y2="0" stroke="#666" stroke-width="4"/>
+  </g>
+  <text x="100" y="180" text-anchor="middle" font-size="20" fill="#666">GABEL</text>
+</svg>

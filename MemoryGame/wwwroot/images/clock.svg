@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <rect width="200" height="200" fill="#f0f0f0"/>
+  <g transform="translate(100,100)">
+    <circle cx="0" cy="0" r="50" fill="#FFF" stroke="#333" stroke-width="3"/>
+    <line x1="0" y1="0" x2="0" y2="-30" stroke="#333" stroke-width="3"/>
+    <line x1="0" y1="0" x2="20" y2="0" stroke="#333" stroke-width="2"/>
+    <circle cx="0" cy="0" r="3" fill="#333"/>
+  </g>
+  <text x="100" y="180" text-anchor="middle" font-size="20" fill="#666">UHR</text>
+</svg>
