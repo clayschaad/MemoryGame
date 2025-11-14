@@ -1,6 +1,8 @@
 # Memory Game
 
-A Blazor WebAssembly application designed to help people with dementia practice image-to-word associations.
+A Blazor WebAssembly application designed to help people with dementia practice image-to-word associations. The game presents simple everyday objects in German and helps users practice matching images with words through adaptive learning.
+
+![Memory Game Start Screen](https://github.com/user-attachments/assets/242b1ae5-a947-4c98-b0b9-6c2d4250911d)
 
 ## Features
 
@@ -13,9 +15,37 @@ A Blazor WebAssembly application designed to help people with dementia practice 
   - Words answered incorrectly appear more often for additional practice
 - **Progress Tracking**: Statistics are stored in browser local storage and persist across sessions
 - **Tablet-Optimized UI**: Designed for 11" tablets with large, easy-to-tap buttons
-- **Simple Vocabulary**: Uses everyday objects (fork, knife, door, ball, house, etc.)
+- **Simple Vocabulary**: Uses everyday objects (Gabel, Messer, Tür, Ball, Haus, etc.)
 - **Immediate Feedback**: Shows whether the answer was correct or incorrect after each round
 - **Game Results**: Displays total correct and incorrect answers at the end of each game
+- **German Language**: All user-facing text is in German for German-speaking users
+
+## Screenshots
+
+### Start Screen
+The game presents a clean, simple interface optimized for people with dementia.
+
+![Start Screen](https://github.com/user-attachments/assets/242b1ae5-a947-4c98-b0b9-6c2d4250911d)
+
+### Image with Word Choices
+In this mode, players see an image and must select the correct German word from 4 options.
+
+![Image with Words Mode](https://github.com/user-attachments/assets/1fbe34db-3376-4cf9-ac76-74ee6c6ece82)
+
+### Word with Image Choices
+Alternatively, players see a German word and must select the matching image from 4 options.
+
+![Word with Images Mode](https://github.com/user-attachments/assets/754cc680-16ff-4360-b961-9ad1259aea22)
+
+### Game Results
+After completing 10 rounds, players see their results with correct and incorrect answer counts.
+
+![Results Screen](https://github.com/user-attachments/assets/2d73bbe7-502c-47ce-a61a-2c4cbfa74572)
+
+### German Translation
+All text visible to users is in German, making the game accessible for German-speaking users.
+
+![German Translation Demo](https://github.com/user-attachments/assets/64975c32-317b-4789-9ee6-07234e6c1084)
 
 ## Technology Stack
 
