@@ -153,8 +153,10 @@ code {
     font-weight: bold;
 }
 
-.btn-start:hover {
-    background-color: #45a049;
+@media (hover: hover) and (pointer: fine) {
+    .btn-start:hover {
+        background-color: #45a049;
+    }
 }
 
 .btn-start:active {
@@ -188,6 +190,11 @@ code {
     min-height: 300px;
 }
 
+.question-area:has(.question-word) {
+    min-height: 150px;
+    margin-bottom: 20px;
+}
+
 .question-image {
     max-width: 100%;
     max-height: 400px;
@@ -198,7 +205,7 @@ code {
 }
 
 .question-word {
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight: bold;
     color: #333;
     text-transform: capitalize;
@@ -227,10 +234,12 @@ code {
     text-transform: capitalize;
 }
 
-.option-button:hover {
-    background-color: #e9ecef;
-    border-color: #4CAF50;
-    transform: scale(1.05);
+@media (hover: hover) and (pointer: fine) {
+    .option-button:hover {
+        background-color: #e9ecef;
+        border-color: #4CAF50;
+        transform: scale(1.05);
+    }
 }
 
 .option-button:active {
