@@ -133,28 +133,22 @@ MemoryGame/
 
 ## Adding New Words/Images
 
-The game automatically discovers images from the `wwwroot/images/` folder. To add new words and images:
+The game loads images listed in the `wwwroot/manifest.txt` file. To add new words and images:
 
-1. **Add your image**: Place an SVG image in `wwwroot/images/` with the English filename (e.g., `apple.svg`, `orange.svg`)
-2. **Add to discovery list**: Add the filename (without extension) to the `commonWords` array in `Services/GameService.cs`:
-   ```csharp
-   var commonWords = new[]
-   {
-       "ball", "bed", "book", "car", "cat", "chair", "clock", "cup",
-       "dog", "door", "fork", "hat", "house", "knife", "phone",
-       "shoe", "spoon", "table", "tree", "window",
-       "apple", "orange"  // Add new words here
-   };
+1. **Add your image**: Place an SVG image in `wwwroot/images/` with the filename (e.g., `apple.svg`, `orange.svg`)
+2. **Update the manifest**: Add the filename (with extension) to `wwwroot/manifest.txt`:
    ```
-3. **Add German translation** (optional): If you want a custom German translation, update the `ConvertToGermanWord` method in `Services/GameService.cs`:
-   ```csharp
-   "apple" => "Apfel",
-   "orange" => "Orange",
+   ball.svg
+   bed.svg
+   book.svg
+   apple.svg
+   orange.svg
    ```
-   
-   If no translation is provided, the filename will be capitalized and used as-is.
+   Each image filename should be on its own line in the manifest file.
 
-The game will automatically discover and load images that exist in the folder. No manifest file needed!
+3. **Image naming**: The word displayed in the game is derived from the filename without the extension (e.g., `apple.svg` becomes "Apple" in the game).
+
+The game uses efficient parallel loading to fetch all images listed in the manifest file at startup.
 
 ## Browser Compatibility
 
