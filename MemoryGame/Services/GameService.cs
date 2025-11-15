@@ -46,25 +46,20 @@ public sealed class GameService
     {
         _availableWords = [];
         
-        var commonWords = new[]
-        {
-            "ball", "bed", "book", "car", "cat", "chair", "clock", "cup",
-            "dog", "door", "fork", "hat", "house", "knife", "phone",
-            "shoe", "spoon", "table", "tree", "window"
-        };
+        var manifest = await _httpClient.GetStringAsync("manifest.txt");
+        var imageNames = manifest.Split('\n', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
         
-        var loadTasks = commonWords.Select(async word =>
+        var loadTasks = imageNames.Select(async imageName =>
         {
-            var imagePath = $"images/{word}.svg";
+            var imagePath = $"images/{imageName}";
             try
             {
                 var response = await _httpClient.GetAsync(imagePath, HttpCompletionOption.ResponseHeadersRead);
                 if (response.IsSuccessStatusCode)
                 {
-                    var germanWord = ConvertToGermanWord(word);
                     return new GameWord
                     {
-                        Word = germanWord,
+                        Word = Path.GetFileNameWithoutExtension(imageName),
                         ImagePath = imagePath,
                         CorrectCount = 0,
                         IncorrectCount = 0
@@ -79,34 +74,6 @@ public sealed class GameService
         
         var results = await Task.WhenAll(loadTasks);
         _availableWords = results.Where(w => w != null).Cast<GameWord>().ToList();
-    }
-    
-    private static string ConvertToGermanWord(string englishWord)
-    {
-        return englishWord.ToLower() switch
-        {
-            "fork" => "Gabel",
-            "knife" => "Messer",
-            "spoon" => "Löffel",
-            "door" => "Tür",
-            "window" => "Fenster",
-            "ball" => "Ball",
-            "house" => "Haus",
-            "tree" => "Baum",
-            "car" => "Auto",
-            "cat" => "Katze",
-            "dog" => "Hund",
-            "chair" => "Stuhl",
-            "table" => "Tisch",
-            "cup" => "Tasse",
-            "book" => "Buch",
-            "clock" => "Uhr",
-            "bed" => "Bett",
-            "phone" => "Telefon",
-            "shoe" => "Schuh",
-            "hat" => "Hut",
-            _ => char.ToUpper(englishWord[0]) + englishWord[1..].ToLower()
-        };
     }
     
     public GameSession CreateNewGame()
