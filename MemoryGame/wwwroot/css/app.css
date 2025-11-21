@@ -348,7 +348,7 @@ code {
     }
 }
 
-@media (min-width: 2400px) and (min-height: 1500px) {
+@media (min-width: 2500px) and (min-height: 1550px) {
     .memory-game-container {
         padding: 10px;
     }
