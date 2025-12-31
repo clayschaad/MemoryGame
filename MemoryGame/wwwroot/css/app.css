@@ -350,33 +350,95 @@ code {
 
 @media (min-width: 2500px) and (min-height: 1550px) {
     .memory-game-container {
-        padding: 10px;
+        max-width: 2400px;
+        padding: 20px;
+    }
+    
+    .start-screen, .results-screen {
+        padding: 40px;
+    }
+    
+    .start-screen h1, .results-screen h1 {
+        font-size: 4rem;
+        margin-bottom: 30px;
+    }
+    
+    .subtitle {
+        font-size: 2rem;
+        margin-bottom: 40px;
+    }
+    
+    .btn-start {
+        font-size: 2.5rem;
+        padding: 25px 80px;
+    }
+    
+    .game-screen {
+        max-width: 2000px;
     }
     
     .game-header {
-        margin-bottom: 12px;
+        margin-bottom: 25px;
+    }
+    
+    .round-counter {
+        font-size: 2rem;
+        padding: 15px;
     }
     
     .question-area {
-        margin-bottom: 15px;
-        min-height: 200px;
+        margin-bottom: 30px;
+        min-height: 400px;
     }
     
     .question-image {
-        max-height: 260px;
+        max-height: 500px;
+    }
+    
+    .question-word {
+        font-size: 5rem;
     }
     
     .options-area {
-        gap: 12px;
-        margin-bottom: 15px;
+        gap: 25px;
+        margin-bottom: 30px;
+    }
+    
+    .option-button {
+        padding: 35px;
+        font-size: 2.5rem;
     }
     
     .option-button.image-option {
-        height: 170px;
-        padding: 12px;
+        height: 320px;
+        padding: 25px;
     }
     
     .option-button.image-option img {
-        max-height: 140px;
+        max-height: 270px;
+    }
+    
+    .feedback {
+        padding: 50px 80px;
+        font-size: 3.5rem;
+    }
+    
+    .results {
+        gap: 50px;
+        margin: 50px 0;
+    }
+    
+    .result-item {
+        padding: 40px;
+        min-width: 250px;
+    }
+    
+    .result-label {
+        font-size: 2rem;
+        margin-bottom: 15px;
+    }
+    
+    .result-value {
+        font-size: 5rem;
     }
 }
