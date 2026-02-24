@@ -21,7 +21,7 @@
             <button class="btn-start" @onclick="StartNewGame">Neues Spiel starten</button>
         </div>
     }
-    else if (_currentSession.IsComplete)
+    else if (_currentSession.IsComplete && !_showStatistics)
     {
         <div class="results-screen">
             <h1>Spiel beendet!</h1>
@@ -36,6 +36,68 @@
                 </div>
             </div>
             <button class="btn-start" @onclick="StartNewGame">Nochmal spielen</button>
+            <button class="btn-stats" @onclick="ShowStatistics">Statistik anzeigen</button>
+        </div>
+    }
+    else if (_currentSession.IsComplete && _showStatistics)
+    {
+        var words = GameService.GetWords()
+            .OrderBy(w => w.CorrectCount + w.IncorrectCount == 0 ? 1 : 0)
+            .ThenBy(w => w.CorrectCount + w.IncorrectCount == 0
+                ? 0
+                : (double)w.CorrectCount / (w.CorrectCount + w.IncorrectCount))
+            .ToList();
+
+        var playedWords = words.Where(w => w.CorrectCount + w.IncorrectCount > 0).ToList();
+        var overallAccuracy = playedWords.Count == 0
+            ? 0
+            : (int)Math.Round(100.0 * playedWords.Sum(w => w.CorrectCount) / playedWords.Sum(w => w.CorrectCount + w.IncorrectCount));
+
+        <div class="stats-screen">
+            <h1>Statistik</h1>
+
+            <div class="stats-summary">
+                @playedWords.Count von @words.Count Wörtern geübt
+                @if (playedWords.Count > 0)
+                {
+                    <span> · @overallAccuracy% richtig</span>
+                }
+            </div>
+
+            <div class="stats-list">
+                @foreach (var word in words)
+                {
+                    var total = word.CorrectCount + word.IncorrectCount;
+                    var accuracy = total == 0 ? 0 : (int)Math.Round(100.0 * word.CorrectCount / total);
+                    var barClass = total == 0 ? "bar-unplayed" : accuracy >= 70 ? "bar-green" : accuracy >= 40 ? "bar-orange" : "bar-red";
+
+                    <div class="stats-row">
+                        <img src="@word.ImagePath" alt="@word.Word" class="stats-thumbnail" />
+                        <div class="stats-word-info">
+                            <span class="stats-word-name">@word.Word</span>
+                            <div class="stats-bar-container">
+                                <div class="stats-bar @barClass" style="width: @(total == 0 ? 0 : accuracy)%"></div>
+                            </div>
+                        </div>
+                        <span class="stats-accuracy">@(total == 0 ? "—" : $"{accuracy}% richtig")</span>
+                    </div>
+                }
+            </div>
+
+            @if (_confirmReset)
+            {
+                <div class="reset-confirm">
+                    <span>Alle Statistiken wirklich zurücksetzen?</span>
+                    <button class="btn-confirm-yes" @onclick="ConfirmReset">Ja, zurücksetzen</button>
+                    <button class="btn-confirm-no" @onclick="() => _confirmReset = false">Abbrechen</button>
+                </div>
+            }
+            else
+            {
+                <button class="btn-reset" @onclick="() => _confirmReset = true">Zurücksetzen</button>
+            }
+
+            <button class="btn-start" @onclick="GoToStart">Zurück zum Start</button>
         </div>
     }
     else
@@ -96,6 +158,8 @@
     private bool _showFeedback;
     private string _feedbackMessage = "";
     private string _feedbackClass = "";
+    private bool _showStatistics;
+    private bool _confirmReset;
 
     protected override async Task OnInitializedAsync()
     {
@@ -144,5 +208,23 @@
 
         StateHasChanged();
     }
-}
 
+    private void ShowStatistics()
+    {
+        _showStatistics = true;
+    }
+
+    private void GoToStart()
+    {
+        _currentSession = null;
+        _showStatistics = false;
+        _confirmReset = false;
+    }
+
+    private async Task ConfirmReset()
+    {
+        await GameService.ResetStatisticsAsync();
+        _confirmReset = false;
+        StateHasChanged();
+    }
+}

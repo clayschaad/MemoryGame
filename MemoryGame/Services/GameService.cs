@@ -160,4 +160,23 @@ public sealed class GameService
         
         await _localStorage.SaveStatisticsAsync(_statistics);
     }
+
+    public IReadOnlyList<GameWord> GetWords()
+    {
+        return _statistics?.Words ?? [];
+    }
+
+    public async Task ResetStatisticsAsync()
+    {
+        if (_statistics == null)
+            return;
+
+        foreach (var word in _statistics.Words)
+        {
+            word.CorrectCount = 0;
+            word.IncorrectCount = 0;
+        }
+
+        await _localStorage.SaveStatisticsAsync(_statistics);
+    }
 }

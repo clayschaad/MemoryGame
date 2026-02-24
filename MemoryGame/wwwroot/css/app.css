@@ -332,6 +332,169 @@ code {
     padding: 20px;
 }
 
+
+/* Statistics Screen */
+.stats-screen {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.stats-screen h1 {
+    font-size: 2.2rem;
+    color: #333;
+    margin: 0;
+}
+
+.stats-summary {
+    font-size: 1.2rem;
+    color: #666;
+}
+
+.stats-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.stats-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px;
+    background-color: #f8f9fa;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+}
+
+.stats-thumbnail {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.stats-word-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.stats-word-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #333;
+    text-transform: capitalize;
+}
+
+.stats-bar-container {
+    width: 100%;
+    height: 14px;
+    background-color: #e0e0e0;
+    border-radius: 7px;
+    overflow: hidden;
+}
+
+.stats-bar {
+    height: 100%;
+    border-radius: 7px;
+    transition: width 0.4s ease;
+    min-width: 0;
+}
+
+.bar-green  { background-color: #4CAF50; }
+.bar-orange { background-color: #FF9800; }
+.bar-red    { background-color: #f44336; }
+.bar-unplayed { background-color: #e0e0e0; width: 0; }
+
+.stats-accuracy {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #555;
+    min-width: 110px;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.btn-stats {
+    font-size: 1.2rem;
+    padding: 12px 35px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .btn-stats:hover {
+        background-color: #1976D2;
+    }
+}
+
+.btn-stats:active {
+    transform: scale(0.98);
+}
+
+.btn-reset {
+    font-size: 1.1rem;
+    padding: 10px 30px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .btn-reset:hover {
+        background-color: #d32f2f;
+    }
+}
+
+.reset-confirm {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.btn-confirm-yes {
+    padding: 10px 20px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.btn-confirm-no {
+    padding: 10px 20px;
+    background-color: #9e9e9e;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
 @media (max-width: 768px) {
     .question-word {
         font-size: 3rem;
@@ -440,5 +603,71 @@ code {
     
     .result-value {
         font-size: 5rem;
+    }
+
+    .stats-screen {
+        max-width: 2000px;
+        gap: 35px;
+        padding: 30px 0;
+    }
+
+    .stats-screen h1 {
+        font-size: 4rem;
+    }
+
+    .stats-summary {
+        font-size: 2rem;
+    }
+
+    .stats-list {
+        gap: 20px;
+    }
+
+    .stats-row {
+        gap: 25px;
+        padding: 20px;
+    }
+
+    .stats-thumbnail {
+        width: 140px;
+        height: 140px;
+    }
+
+    .stats-word-name {
+        font-size: 2.2rem;
+    }
+
+    .stats-bar-container {
+        height: 22px;
+        border-radius: 11px;
+    }
+
+    .stats-bar {
+        border-radius: 11px;
+    }
+
+    .stats-accuracy {
+        font-size: 2rem;
+        min-width: 200px;
+    }
+
+    .btn-stats {
+        font-size: 2.2rem;
+        padding: 22px 65px;
+    }
+
+    .btn-reset {
+        font-size: 2rem;
+        padding: 18px 55px;
+    }
+
+    .reset-confirm {
+        font-size: 2rem;
+        gap: 20px;
+    }
+
+    .btn-confirm-yes, .btn-confirm-no {
+        font-size: 1.8rem;
+        padding: 18px 40px;
     }
 }
