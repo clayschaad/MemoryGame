@@ -117,7 +117,7 @@ code {
 .memory-game-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 15px;
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -126,24 +126,24 @@ code {
 
 .start-screen, .results-screen {
     text-align: center;
-    padding: 40px;
+    padding: 20px;
 }
 
 .start-screen h1, .results-screen h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
+    font-size: 2.2rem;
+    margin-bottom: 15px;
     color: #333;
 }
 
 .subtitle {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: #666;
-    margin-bottom: 40px;
+    margin-bottom: 25px;
 }
 
 .btn-start {
-    font-size: 1.8rem;
-    padding: 20px 60px;
+    font-size: 1.4rem;
+    padding: 15px 45px;
     background-color: #4CAF50;
     color: white;
     border: none;
@@ -170,14 +170,14 @@ code {
 
 .game-header {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 
 .round-counter {
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     font-weight: bold;
     color: #333;
-    padding: 10px;
+    padding: 8px;
     background-color: #f0f0f0;
     border-radius: 8px;
 }
@@ -186,13 +186,13 @@ code {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 30px;
-    min-height: 300px;
+    margin-bottom: 20px;
+    min-height: 220px;
 }
 
 .question-image {
     max-width: 100%;
-    max-height: 400px;
+    max-height: 280px;
     object-fit: contain;
     border: 3px solid #ddd;
     border-radius: 10px;
@@ -200,7 +200,7 @@ code {
 }
 
 .question-word {
-    font-size: 4rem;
+    font-size: 2.8rem;
     font-weight: bold;
     color: #333;
     text-transform: capitalize;
@@ -209,8 +209,8 @@ code {
 .options-area {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-bottom: 30px;
+    gap: 15px;
+    margin-bottom: 20px;
 }
 
 .options-area.image-options {
@@ -218,8 +218,8 @@ code {
 }
 
 .option-button {
-    padding: 30px;
-    font-size: 2rem;
+    padding: 20px;
+    font-size: 1.5rem;
     background-color: #f8f9fa;
     border: 3px solid #ddd;
     border-radius: 10px;
@@ -242,8 +242,8 @@ code {
 }
 
 .option-button.image-option {
-    padding: 20px;
-    height: 250px;
+    padding: 15px;
+    height: 180px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -251,7 +251,7 @@ code {
 
 .option-button.image-option img {
     max-width: 100%;
-    max-height: 200px;
+    max-height: 150px;
     object-fit: contain;
 }
 
@@ -260,8 +260,8 @@ code {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 40px 60px;
-    font-size: 2.5rem;
+    padding: 30px 45px;
+    font-size: 1.8rem;
     font-weight: bold;
     border-radius: 15px;
     z-index: 1000;
@@ -293,15 +293,15 @@ code {
 .results {
     display: flex;
     justify-content: center;
-    gap: 40px;
-    margin: 40px 0;
+    gap: 30px;
+    margin: 25px 0;
     flex-wrap: wrap;
 }
 
 .result-item {
-    padding: 30px;
+    padding: 25px;
     border-radius: 10px;
-    min-width: 200px;
+    min-width: 180px;
     text-align: center;
 }
 
@@ -317,19 +317,19 @@ code {
 
 .result-label {
     display: block;
-    font-size: 1.5rem;
-    margin-bottom: 10px;
+    font-size: 1.2rem;
+    margin-bottom: 8px;
 }
 
 .result-value {
     display: block;
-    font-size: 3.5rem;
+    font-size: 2.8rem;
     font-weight: bold;
 }
 
 .loading {
     text-align: center;
-    padding: 40px;
+    padding: 20px;
 }
 
 @media (max-width: 768px) {
@@ -345,5 +345,100 @@ code {
     .btn-start {
         font-size: 1.5rem;
         padding: 15px 40px;
+    }
+}
+
+@media (min-width: 2500px) and (min-height: 1550px) {
+    .memory-game-container {
+        max-width: 2400px;
+        padding: 20px;
+    }
+    
+    .start-screen, .results-screen {
+        padding: 40px;
+    }
+    
+    .start-screen h1, .results-screen h1 {
+        font-size: 4rem;
+        margin-bottom: 30px;
+    }
+    
+    .subtitle {
+        font-size: 2rem;
+        margin-bottom: 40px;
+    }
+    
+    .btn-start {
+        font-size: 2.5rem;
+        padding: 25px 80px;
+    }
+    
+    .game-screen {
+        max-width: 2000px;
+    }
+    
+    .game-header {
+        margin-bottom: 25px;
+    }
+    
+    .round-counter {
+        font-size: 2rem;
+        padding: 15px;
+    }
+    
+    .question-area {
+        margin-bottom: 30px;
+        min-height: 400px;
+    }
+    
+    .question-image {
+        max-height: 500px;
+    }
+    
+    .question-word {
+        font-size: 5rem;
+    }
+    
+    .options-area {
+        gap: 25px;
+        margin-bottom: 30px;
+    }
+    
+    .option-button {
+        padding: 35px;
+        font-size: 2.5rem;
+    }
+    
+    .option-button.image-option {
+        height: 320px;
+        padding: 25px;
+    }
+    
+    .option-button.image-option img {
+        max-height: 270px;
+    }
+    
+    .feedback {
+        padding: 50px 80px;
+        font-size: 3.5rem;
+    }
+    
+    .results {
+        gap: 50px;
+        margin: 50px 0;
+    }
+    
+    .result-item {
+        padding: 40px;
+        min-width: 250px;
+    }
+    
+    .result-label {
+        font-size: 2rem;
+        margin-bottom: 15px;
+    }
+    
+    .result-value {
+        font-size: 5rem;
     }
 }
