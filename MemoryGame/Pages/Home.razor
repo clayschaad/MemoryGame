@@ -64,6 +64,21 @@
                 }
             </div>
 
+            @if (_confirmReset)
+            {
+                <div class="reset-confirm">
+                    <span>Alle Statistiken wirklich zurücksetzen?</span>
+                    <button class="btn-confirm-yes" @onclick="ConfirmReset">Ja, zurücksetzen</button>
+                    <button class="btn-confirm-no" @onclick="() => _confirmReset = false">Abbrechen</button>
+                </div>
+            }
+            else
+            {
+                <button class="btn-reset" @onclick="() => _confirmReset = true">Zurücksetzen</button>
+            }
+
+            <button class="btn-start" @onclick="GoToStart">Zurück zum Start</button>
+
             <div class="stats-list">
                 @foreach (var word in words)
                 {
@@ -83,21 +98,6 @@
                     </div>
                 }
             </div>
-
-            @if (_confirmReset)
-            {
-                <div class="reset-confirm">
-                    <span>Alle Statistiken wirklich zurücksetzen?</span>
-                    <button class="btn-confirm-yes" @onclick="ConfirmReset">Ja, zurücksetzen</button>
-                    <button class="btn-confirm-no" @onclick="() => _confirmReset = false">Abbrechen</button>
-                </div>
-            }
-            else
-            {
-                <button class="btn-reset" @onclick="() => _confirmReset = true">Zurücksetzen</button>
-            }
-
-            <button class="btn-start" @onclick="GoToStart">Zurück zum Start</button>
         </div>
     }
     else
