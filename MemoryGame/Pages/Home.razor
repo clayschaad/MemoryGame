@@ -38,6 +38,8 @@
                 }
             </div>
 
+            <button class="btn-start" @onclick="GoToStart">Zurück zum Start</button>
+
             @if (_confirmReset)
             {
                 <div class="reset-confirm">
@@ -50,8 +52,6 @@
             {
                 <button class="btn-reset" @onclick="() => _confirmReset = true">Zurücksetzen</button>
             }
-
-            <button class="btn-start" @onclick="GoToStart">Zurück zum Start</button>
 
             <div class="stats-list">
                 @foreach (var word in words)
