@@ -13,33 +13,7 @@
             <h2>Lädt...</h2>
         </div>
     }
-    else if (_currentSession == null)
-    {
-        <div class="start-screen">
-            <h1>Memory-Spiel</h1>
-            <p class="subtitle">Übe das Zuordnen von Bildern zu Wörtern</p>
-            <button class="btn-start" @onclick="StartNewGame">Neues Spiel starten</button>
-        </div>
-    }
-    else if (_currentSession.IsComplete && !_showStatistics)
-    {
-        <div class="results-screen">
-            <h1>Spiel beendet!</h1>
-            <div class="results">
-                <div class="result-item correct">
-                    <span class="result-label">Richtig:</span>
-                    <span class="result-value">@_currentSession.CorrectAnswers</span>
-                </div>
-                <div class="result-item incorrect">
-                    <span class="result-label">Falsch:</span>
-                    <span class="result-value">@_currentSession.IncorrectAnswers</span>
-                </div>
-            </div>
-            <button class="btn-start" @onclick="StartNewGame">Nochmal spielen</button>
-            <button class="btn-stats" @onclick="ShowStatistics">Statistik anzeigen</button>
-        </div>
-    }
-    else if (_currentSession.IsComplete && _showStatistics)
+    else if (_showStatistics)
     {
         var words = GameService.GetWords()
             .OrderBy(w => w.CorrectCount + w.IncorrectCount == 0 ? 1 : 0)
@@ -64,6 +38,21 @@
                 }
             </div>
 
+            <button class="btn-start" @onclick="GoToStart">Zurück zum Start</button>
+
+            @if (_confirmReset)
+            {
+                <div class="reset-confirm">
+                    <span>Alle Statistiken wirklich zurücksetzen?</span>
+                    <button class="btn-confirm-yes" @onclick="ConfirmReset">Ja, zurücksetzen</button>
+                    <button class="btn-confirm-no" @onclick="() => _confirmReset = false">Abbrechen</button>
+                </div>
+            }
+            else
+            {
+                <button class="btn-reset" @onclick="() => _confirmReset = true">Zurücksetzen</button>
+            }
+
             <div class="stats-list">
                 @foreach (var word in words)
                 {
@@ -83,21 +72,33 @@
                     </div>
                 }
             </div>
-
-            @if (_confirmReset)
-            {
-                <div class="reset-confirm">
-                    <span>Alle Statistiken wirklich zurücksetzen?</span>
-                    <button class="btn-confirm-yes" @onclick="ConfirmReset">Ja, zurücksetzen</button>
-                    <button class="btn-confirm-no" @onclick="() => _confirmReset = false">Abbrechen</button>
+        </div>
+    }
+    else if (_currentSession == null)
+    {
+        <div class="start-screen">
+            <h1>Memory-Spiel</h1>
+            <p class="subtitle">Übe das Zuordnen von Bildern zu Wörtern</p>
+            <button class="btn-start" @onclick="StartNewGame">Neues Spiel starten</button>
+            <button class="btn-stats" @onclick="ShowStatistics">Statistik</button>
+        </div>
+    }
+    else if (_currentSession.IsComplete)
+    {
+        <div class="results-screen">
+            <h1>Spiel beendet!</h1>
+            <div class="results">
+                <div class="result-item correct">
+                    <span class="result-label">Richtig:</span>
+                    <span class="result-value">@_currentSession.CorrectAnswers</span>
                 </div>
-            }
-            else
-            {
-                <button class="btn-reset" @onclick="() => _confirmReset = true">Zurücksetzen</button>
-            }
-
-            <button class="btn-start" @onclick="GoToStart">Zurück zum Start</button>
+                <div class="result-item incorrect">
+                    <span class="result-label">Falsch:</span>
+                    <span class="result-value">@_currentSession.IncorrectAnswers</span>
+                </div>
+            </div>
+            <button class="btn-start" @onclick="StartNewGame">Nochmal spielen</button>
+            <button class="btn-stats" @onclick="ShowStatistics">Statistik anzeigen</button>
         </div>
     }
     else
